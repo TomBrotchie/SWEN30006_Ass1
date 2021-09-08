@@ -14,13 +14,13 @@ import exceptions.ItemTooHeavyException;
  */
 public class MailPool {
 
-	private LinkedList<Item> pool;
+	private LinkedList<MailItem> pool;
 	private LinkedList<Robot> robots;
 
 	public MailPool(){
 		// Start empty
-		pool = new LinkedList<Item>();
-		robots = new LinkedList<Robot>();
+		pool = new LinkedList<>();
+		robots = new LinkedList<>();
 	}
 
 	/**
@@ -28,9 +28,8 @@ public class MailPool {
      * @param mailItem the mail item being added.
      */
 	public void addToPool(MailItem mailItem) {
-		Item item = new Item(mailItem);
-		pool.add(item);
-		pool.sort(new ItemComparator());
+		pool.add(mailItem);
+		pool.sort(new MailItemComparator());
 	}
 
 	/**
@@ -47,20 +46,21 @@ public class MailPool {
 		Robot robot = i.next();
 		assert(robot.isEmpty());
 		// System.out.printf("P: %3d%n", pool.size());
-		ListIterator<Item> j = pool.listIterator();
+		ListIterator<MailItem> j = pool.listIterator();
 		if (pool.size() > 0) {
 			try {
-			robot.addToHand(j.next().mailItem); // hand first as we want higher priority delivered first
-			j.remove();
-			if (pool.size() > 0) {
-				robot.addToTube(j.next().mailItem);
-				j.remove();
-			}
-			robot.dispatch(); // send the robot off if it has any items to deliver
-			i.remove();       // remove from mailPool queue
-			} catch (Exception e) { 
-	            throw e; 
-	        } 
+//				robot.addToHand(j.next()); // hand first as we want higher priority delivered first
+//				j.remove();
+//				if (pool.size() > 0) {
+//					robot.addToTube(j.next());
+//					j.remove();
+//				}
+				robot.addToRobot(pool);
+				robot.dispatch(); // send the robot off if it has any items to deliver
+				i.remove();       // remove from mailPool queue
+			} catch (Exception e) {
+	            throw e;
+	        }
 		}
 	}
 
@@ -71,24 +71,37 @@ public class MailPool {
 		robots.add(robot);
 	}
 
-	private class Item {
-		int destination;
-		MailItem mailItem;
-		// Use stable sort to keep arrival time relative positions
+//	private class Item {
+//		int destination;
+//		MailItem mailItem;
+//		// Use stable sort to keep arrival time relative positions
+//
+//		public Item(MailItem mailItem) {
+//			destination = mailItem.getDestFloor();
+//			this.mailItem = mailItem;
+//		}
+//	}
 
-		public Item(MailItem mailItem) {
-			destination = mailItem.getDestFloor();
-			this.mailItem = mailItem;
-		}
-	}
+//	public class ItemComparator implements Comparator<Item> {
+//		@Override
+//		public int compare(Item i1, Item i2) {
+//			int order = 0;
+//			if (i1.destination < i2.destination) {
+//				order = 1;
+//			} else if (i1.destination > i2.destination) {
+//				order = -1;
+//			}
+//			return order;
+//		}
+//	}
 
-	public class ItemComparator implements Comparator<Item> {
+	private static class MailItemComparator implements Comparator<MailItem> {
 		@Override
-		public int compare(Item i1, Item i2) {
+		public int compare(MailItem i1, MailItem i2) {
 			int order = 0;
-			if (i1.destination < i2.destination) {
+			if (i1.destination_floor < i2.destination_floor) {
 				order = 1;
-			} else if (i1.destination > i2.destination) {
+			} else if (i1.destination_floor > i2.destination_floor) {
 				order = -1;
 			}
 			return order;

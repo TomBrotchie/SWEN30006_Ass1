@@ -19,6 +19,7 @@ public class Simulation {
     /** Constant for the mail generator */
     private static IMailDelivery iMailDelivery;
 
+
     public static void main(String[] args) throws Exception {
     	
     	/** Load properties for simulation based on either default or a properties file.**/
@@ -60,11 +61,13 @@ public class Simulation {
 
         /** Instantiate MailPool and Automail */
      	MailPool mailPool = new MailPool();
+        boolean fee_charging = Boolean.parseBoolean(configuration.getProperty(Configuration.FEE_CHARGING_KEY));
         int num_regular_robots = Integer.parseInt(configuration.getProperty(Configuration.REGULAR_ROBOTS_KEY));
         int num_fast_robots = Integer.parseInt(configuration.getProperty(Configuration.FAST_ROBOTS_KEY));
         int num_bulk_robots = Integer.parseInt(configuration.getProperty(Configuration.BULK_ROBOTS_KEY));
         int total_robots = num_regular_robots + num_fast_robots + num_bulk_robots;
-        Automail automail = new Automail(mailPool, iMailDelivery, num_regular_robots, num_fast_robots, num_bulk_robots);
+        Automail automail = new Automail(mailPool, iMailDelivery, fee_charging,
+                                        num_regular_robots, num_fast_robots, num_bulk_robots);
 
         int mail_to_create = Integer.parseInt(configuration.getProperty(Configuration.MAIL_TO_CREATE_KEY));
         int mail_max_weight = Integer.parseInt(configuration.getProperty(Configuration.MAIL_MAX_WEIGHT_KEY));
