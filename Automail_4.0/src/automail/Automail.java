@@ -24,13 +24,12 @@ public class Automail {
 
     	Automail.fee_charging = fee_charging;
     	
-    	/** Initialize robots, currently only regular robots */
+    	/** Initialize robots of different types, their IDs are globally incrementing */
     	int i, j, k;
     	robots = new Robot[numRegRobots+numBulkRobots+numFastRobots];
     	for (i = 0; i < numRegRobots; i++) robots[i] = new RegularRobot(delivery, mailPool, i);
     	for (j = i; j < numRegRobots+numFastRobots; j++) robots[j] = new FastRobot(delivery, mailPool, j);
     	for (k = j; k < numRegRobots+numFastRobots+numBulkRobots; k++) robots[k] = new BulkRobot(delivery, mailPool, k);
-    	// TODO: when build robot list, may put fast first then bulk, last regular, to increase efficiency
     }
 
     public Robot[] getRobots() {

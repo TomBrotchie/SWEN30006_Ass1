@@ -4,7 +4,6 @@ import exceptions.ItemTooHeavyException;
 import simulation.IMailDelivery;
 
 import java.util.LinkedList;
-import java.util.ListIterator;
 
 public class RegularRobot extends Robot{
 
@@ -12,19 +11,20 @@ public class RegularRobot extends Robot{
     private static int total_operating_time;
 
     /**
-     * Initiates the robot's location at the start to be at the mailroom
-     * also set it to be waiting for mail.
+     * Initiates a Regular robot type. Use superclass constructor.
+     * Set its robot ID globally, and set hasHand as true
      *
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
-     * @param number
+     * @param number an unique ID among all robot
      */
     public RegularRobot(IMailDelivery delivery, MailPool mailPool, int number) {
-        super(delivery, mailPool, number);
+        super(delivery, mailPool);
         setId("R" + number);
         setHasHand(true);
     }
 
+    /** @see #moveTowards(int) */
     @Override
     public void moveTowards(int destination) {
         if(getCurrent_floor() < destination){
@@ -34,31 +34,30 @@ public class RegularRobot extends Robot{
         }
     }
 
-
-    @Override
-    public int getMaxLoadingItems() { return RegularRobot.MAX_LOADING_ITEMS; }
-
+    /** @see #incrementOperatingTime()  */
     @Override
     protected void incrementOperatingTime() { total_operating_time++; }
 
+    /** @see #getMaxLoadingCapacity() */
     @Override
-    protected String chargeFee(int nFloor) {
-        double serviceFee = BMS.getInstance().lookupServiceFee(nFloor);
-        double averageTime = (double)total_operating_time / Automail.getNumRegRobots();
-        double maintenanceCost = RobotBaseRate.REGULAR.getBaseRate() * averageTime;
-        double totalCost = serviceFee + maintenanceCost;
+    public int getMaxLoadingCapacity() { return RegularRobot.MAX_LOADING_ITEMS; }
 
-        return String.format(" | Service Fee: %.2f | Maintenance: %.2f | Avg. Operating Time: %.2f | Total Charge: %.2f",
-                serviceFee, maintenanceCost, averageTime, totalCost);
-    }
+    /** @see #getAverageTime() */
+    @Override
+    public double getAverageTime() { return (double)total_operating_time / Automail.getNumRegRobots(); }
 
+    /** @see #getBaseRate() */
+    @Override
+    public double getBaseRate() { return RobotBaseRate.REGULAR.getBaseRate(); }
+
+
+    /** @see #addToRobot(LinkedList) */
     @Override
     public void addToRobot(LinkedList<MailItem> pool) throws ItemTooHeavyException {
         if (!pool.isEmpty()) {
             addToHand(pool.get(0));
             pool.remove();
         }
-
         if (!pool.isEmpty()) {
             addToTube(pool.get(0));
             pool.remove();

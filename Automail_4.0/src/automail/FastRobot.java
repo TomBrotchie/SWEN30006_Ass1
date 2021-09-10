@@ -8,54 +8,56 @@ import java.util.LinkedList;
 public class FastRobot extends Robot{
 
     private static final int MAX_LOADING_ITEMS = 1;
-    private static final int MOVINGSPEED = 3;
+    private static final int MOVING_SPEED = 3;
     private static int total_operating_time;
 
     /**
-     * Initiates the robot's location at the start to be at the mailroom
-     * also set it to be waiting for mail.
+     * Initiates a fast robot type. Use superclass constructor.
+     * Set its robot ID globally, and set hasHand as true
      *
      * @param delivery governs the final delivery
      * @param mailPool is the source of mail items
-     * @param number
+     * @param number an unique ID among all robot
      */
     public FastRobot(IMailDelivery delivery, MailPool mailPool, int number) {
-        super(delivery, mailPool, number);
+        super(delivery, mailPool);
         setId("F" + number);
         setHasHand(true);
     }
 
+    /** @see #moveTowards(int) */
     @Override
-    public void moveTowards(int destination) {
+    protected void moveTowards(int destination) {
         int floorToGo = Math.abs(destination - getCurrent_floor());
-        if(floorToGo <= MOVINGSPEED){
+        if(floorToGo <= MOVING_SPEED){
             setCurrent_floor(destination);
         } else {
             if (getCurrent_floor() < destination) {
-                goUpFloor(MOVINGSPEED);
+                goUpFloor(MOVING_SPEED);
             } else {
-                goDownFloor(MOVINGSPEED);
+                goDownFloor(MOVING_SPEED);
             }
         }
     }
 
-    @Override
-    public int getMaxLoadingItems() { return FastRobot.MAX_LOADING_ITEMS; }
-
+    /** @see #incrementOperatingTime()  */
     @Override
     protected void incrementOperatingTime() { total_operating_time++; }
 
+    /** @see #getMaxLoadingCapacity() */
     @Override
-    protected String chargeFee(int nFloor) {
-        double serviceFee = BMS.getInstance().lookupServiceFee(nFloor);
-        double averageTime = (double)total_operating_time / Automail.getNumFastRobots();
-        double maintenanceCost = RobotBaseRate.FAST.getBaseRate() * averageTime;
-        double totalCost = serviceFee + maintenanceCost;
+    public int getMaxLoadingCapacity() { return FastRobot.MAX_LOADING_ITEMS; }
 
-        return String.format(" | Service Fee: %.2f | Maintenance: %.2f | Avg. Operating Time: %.2f | Total Charge: %.2f",
-                            serviceFee, maintenanceCost, averageTime, totalCost);
-    }
+    /** @see #getAverageTime() */
+    @Override
+    public double getAverageTime() { return (double)total_operating_time / Automail.getNumFastRobots(); }
 
+    /** @see #getBaseRate() */
+    @Override
+    public double getBaseRate() { return RobotBaseRate.FAST.getBaseRate(); }
+
+
+    /** @see #addToRobot(LinkedList) */
     @Override
     public void addToRobot(LinkedList<MailItem> pool) throws ItemTooHeavyException {
         assert(getDeliveryItem() == null);

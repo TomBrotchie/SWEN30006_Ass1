@@ -13,7 +13,7 @@ import java.util.Set;
 public class ReportDelivery implements IMailDelivery {
 
 
-    /**An array list to record mails that have been delivered*/
+    /** An array list to record mails that have been delivered*/
     private Set<MailItem> deliveredItems;
     private static double total_delay = 0;
 

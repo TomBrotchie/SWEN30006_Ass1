@@ -59,7 +59,7 @@ public class Simulation {
          * This code section is for running a simulation
          */
 
-        /** Instantiate MailPool and Automail */
+        /** Instantiate MailPool and Automail and FeeCharging capacity */
      	MailPool mailPool = new MailPool();
         boolean fee_charging = Boolean.parseBoolean(configuration.getProperty(Configuration.FEE_CHARGING_KEY));
         int num_regular_robots = Integer.parseInt(configuration.getProperty(Configuration.REGULAR_ROBOTS_KEY));

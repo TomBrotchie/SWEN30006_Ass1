@@ -46,15 +46,8 @@ public class MailPool {
 		Robot robot = i.next();
 		assert(robot.isEmpty());
 		// System.out.printf("P: %3d%n", pool.size());
-		ListIterator<MailItem> j = pool.listIterator();
 		if (pool.size() > 0) {
 			try {
-//				robot.addToHand(j.next()); // hand first as we want higher priority delivered first
-//				j.remove();
-//				if (pool.size() > 0) {
-//					robot.addToTube(j.next());
-//					j.remove();
-//				}
 				robot.addToRobot(pool);
 				robot.dispatch(); // send the robot off if it has any items to deliver
 				i.remove();       // remove from mailPool queue
@@ -71,29 +64,6 @@ public class MailPool {
 		robots.add(robot);
 	}
 
-//	private class Item {
-//		int destination;
-//		MailItem mailItem;
-//		// Use stable sort to keep arrival time relative positions
-//
-//		public Item(MailItem mailItem) {
-//			destination = mailItem.getDestFloor();
-//			this.mailItem = mailItem;
-//		}
-//	}
-
-//	public class ItemComparator implements Comparator<Item> {
-//		@Override
-//		public int compare(Item i1, Item i2) {
-//			int order = 0;
-//			if (i1.destination < i2.destination) {
-//				order = 1;
-//			} else if (i1.destination > i2.destination) {
-//				order = -1;
-//			}
-//			return order;
-//		}
-//	}
 
 	private static class MailItemComparator implements Comparator<MailItem> {
 		@Override
@@ -107,5 +77,4 @@ public class MailPool {
 			return order;
 		}
 	}
-
 }
