@@ -12,13 +12,13 @@ import java.util.TreeMap;
 public class MailItem {
 	
     /** Represents the destination floor to which the mail is intended to go */
-    protected final int destination_floor;
+    protected final int DESTINATION_FLOOR;
     /** The mail identifier */
-    protected final String id;
+    protected final String MAILITEM_ID;
     /** The time the mail item arrived */
-    protected final int arrival_time;
+    protected final int ARRIVAL_TIME;
     /** The weight in grams of the mail item */
-    protected final int weight;
+    protected final int WEIGHT;
 
     /**
      * Constructor for a MailItem
@@ -27,10 +27,10 @@ public class MailItem {
      * @param weight the weight of this mail item
      */
     public MailItem(int dest_floor, int arrival_time, int weight){
-        this.destination_floor = dest_floor;
-        this.id = String.valueOf(hashCode());
-        this.arrival_time = arrival_time;
-        this.weight = weight;
+        this.DESTINATION_FLOOR = dest_floor;
+        this.MAILITEM_ID = String.valueOf(hashCode());
+        this.ARRIVAL_TIME = arrival_time;
+        this.WEIGHT = weight;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class MailItem {
      * @return the destination floor of the mail item
      */
     public int getDestFloor() {
-        return destination_floor;
+        return DESTINATION_FLOOR;
     }
     
     /**
@@ -51,7 +51,7 @@ public class MailItem {
      * @return the ID of the mail item
      */
     public String getId() {
-        return id;
+        return MAILITEM_ID;
     }
 
     /**
@@ -59,7 +59,7 @@ public class MailItem {
      * @return the arrival time of the mail item
      */
     public int getArrivalTime(){
-        return arrival_time;
+        return ARRIVAL_TIME;
     }
 
     /**
@@ -67,7 +67,7 @@ public class MailItem {
     * @return the weight of the mail item
     */
    public int getWeight(){
-       return weight;
+       return WEIGHT;
    }
    
 	static private int count = 0;

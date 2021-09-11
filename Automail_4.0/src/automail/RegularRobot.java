@@ -9,6 +9,8 @@ public class RegularRobot extends Robot{
 
     private static final int MAX_LOADING_ITEMS = 2;
     private static int total_operating_time;
+    private static final int MOVING_SPEED = 1;
+
 
     /**
      * Initiates a Regular robot type. Use superclass constructor.
@@ -26,11 +28,11 @@ public class RegularRobot extends Robot{
 
     /** @see #moveTowards(int) */
     @Override
-    public void moveTowards(int destination) {
+    protected void moveTowards(int destination) {
         if(getCurrent_floor() < destination){
-            goUpFloor(1);
+            goUpFloor(MOVING_SPEED);
         } else {
-            goDownFloor(1);
+            goDownFloor(MOVING_SPEED);
         }
     }
 
