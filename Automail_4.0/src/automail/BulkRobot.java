@@ -59,7 +59,7 @@ public class BulkRobot extends Robot{
         for (int i = 0; i < MAX_LOADING_ITEMS; i++) {
             if (!pool.isEmpty()) {
                 MailItem mail = pool.get(0);
-                if (mail.weight > getIndividualMaxWeight()) throw new ItemTooHeavyException();
+                if (mail.WEIGHT > getIndividualMaxWeight()) throw new ItemTooHeavyException();
                 getTube().add(0, mail);
                 pool.remove();
             } else break;

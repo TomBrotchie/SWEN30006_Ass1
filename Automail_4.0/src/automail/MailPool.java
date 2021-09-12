@@ -69,9 +69,9 @@ public class MailPool {
 		@Override
 		public int compare(MailItem i1, MailItem i2) {
 			int order = 0;
-			if (i1.destination_floor < i2.destination_floor) {
+			if (i1.DESTINATION_FLOOR < i2.DESTINATION_FLOOR) {
 				order = 1;
-			} else if (i1.destination_floor > i2.destination_floor) {
+			} else if (i1.DESTINATION_FLOOR > i2.DESTINATION_FLOOR) {
 				order = -1;
 			}
 			return order;

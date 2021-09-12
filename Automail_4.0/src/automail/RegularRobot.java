@@ -68,13 +68,13 @@ public class RegularRobot extends Robot{
 
     private void addToHand(MailItem mailItem) throws ItemTooHeavyException {
         assert(getDeliveryItem() == null);
-        if (mailItem.weight > getIndividualMaxWeight()) throw new ItemTooHeavyException();
+        if (mailItem.WEIGHT > getIndividualMaxWeight()) throw new ItemTooHeavyException();
         setDeliveryItem(mailItem);
     }
 
     private void addToTube(MailItem mailItem) throws ItemTooHeavyException {
         assert(getTube().isEmpty());
-        if (mailItem.weight > getIndividualMaxWeight()) throw new ItemTooHeavyException();
+        if (mailItem.WEIGHT > getIndividualMaxWeight()) throw new ItemTooHeavyException();
         getTube().add(mailItem);
     }
 }

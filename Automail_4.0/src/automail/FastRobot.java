@@ -62,7 +62,7 @@ public class FastRobot extends Robot{
     public void addToRobot(LinkedList<MailItem> pool) throws ItemTooHeavyException {
         assert(getDeliveryItem() == null);
         MailItem mail = pool.getFirst();
-        if (mail.weight > getIndividualMaxWeight()) throw new ItemTooHeavyException();
+        if (mail.WEIGHT > getIndividualMaxWeight()) throw new ItemTooHeavyException();
         setDeliveryItem(mail);
         pool.remove(0);
     }
