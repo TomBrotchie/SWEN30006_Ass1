@@ -35,7 +35,8 @@ public class MailItem {
 
     @Override
     public String toString(){
-        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d", id, arrival_time, destination_floor, weight);
+        return String.format("Mail Item:: ID: %6s | Arrival: %4d | Destination: %2d | Weight: %4d",
+                MAILITEM_ID, ARRIVAL_TIME, DESTINATION_FLOOR, WEIGHT);
     }
 
     /**

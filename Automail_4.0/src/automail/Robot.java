@@ -19,8 +19,6 @@ public abstract class Robot {
     public enum RobotState { DELIVERING, WAITING, RETURNING }
     private RobotState current_state;
 
-    private final IMailDelivery delivery;
-
     private String id;
     private int current_floor;
     private int destination_floor;
@@ -29,10 +27,12 @@ public abstract class Robot {
 
     private MailItem deliveryItem = null;
     private ArrayList<MailItem> tube = new ArrayList<>();
+    private int deliveryCounter;
     private boolean hasHand;
 
-    private int deliveryCounter;
-    
+    private final IMailDelivery delivery;
+    private static final BMSAdaptor BMS_server = BMS.getInstance();
+
 
     /**
      * Initiates the robot's location at the start to be at the mailroom
@@ -164,7 +164,8 @@ public abstract class Robot {
      * @return total cost of this delivery trip
      */
     private String chargeFee(int nFloor) {
-        double serviceFee = BMS.getInstance().lookupServiceFee(nFloor);
+//        double serviceFee = BMS.getInstance().lookupServiceFee(nFloor);
+        double serviceFee = BMS_server.lookupServiceFee(nFloor);
         double averageTime = getAverageTime();
         double maintenanceCost = getBaseRate() * averageTime;
         double totalCost = serviceFee + maintenanceCost;
