@@ -4,7 +4,7 @@ import com.unimelb.swen30006.wifimodem.WifiModem;
 
 import java.util.HashMap;
 
-public class BMS implements BMSAdaptor{
+public class BMS {
 
     private static BMS BMS_server = null;
 
@@ -39,8 +39,9 @@ public class BMS implements BMSAdaptor{
      * @param nFloor The destination floor of delivery
      * @return The remotely looked up service fee of nFloor
      */
-    @Override
+   
     public double lookupServiceFee(int nFloor) {
+        
         double price = wifiModem.forwardCallToAPI_LookupPrice(nFloor);
 
         if (price < 0) {

@@ -31,7 +31,7 @@ public abstract class Robot {
     private boolean hasHand;
 
     private final IMailDelivery delivery;
-    private static final BMSAdaptor BMS_server = BMS.getInstance();
+    // private static final BMSAdaptor BMS_server = BMS.getInstance();
 
 
     /**
@@ -165,7 +165,7 @@ public abstract class Robot {
      */
     private String chargeFee(int nFloor) {
 //        double serviceFee = BMS.getInstance().lookupServiceFee(nFloor);
-        double serviceFee = BMS_server.lookupServiceFee(nFloor);
+        double serviceFee = BMSAdaptor.getServiceFee(nFloor);
         double averageTime = getAverageTime();
         double maintenanceCost = getBaseRate() * averageTime;
         double totalCost = serviceFee + maintenanceCost;
