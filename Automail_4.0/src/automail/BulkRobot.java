@@ -5,6 +5,9 @@ import simulation.IMailDelivery;
 
 import java.util.LinkedList;
 
+/**
+ * Bigger carry capacity robot (5 items in tube)
+ */
 public class BulkRobot extends Robot{
 
     private static final int MAX_LOADING_ITEMS = 5;

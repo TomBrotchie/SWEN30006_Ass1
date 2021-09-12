@@ -5,6 +5,9 @@ import simulation.IMailDelivery;
 
 import java.util.LinkedList;
 
+/**
+ * Faster speed robot, only carry one item
+ */
 public class FastRobot extends Robot{
 
     private static final int MAX_LOADING_ITEMS = 1;

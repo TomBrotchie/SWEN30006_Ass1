@@ -3,8 +3,6 @@ package automail;
 import java.util.Map;
 import java.util.TreeMap;
 
-// import java.util.UUID;
-
 /**
  * Represents a mail item
  */
@@ -80,6 +78,5 @@ public class MailItem {
 		if (hash == null) { hash = count++; hashMap.put(hash0, hash); }
 		return hash;
 	}
-
 
 }

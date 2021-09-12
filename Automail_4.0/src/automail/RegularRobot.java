@@ -5,6 +5,9 @@ import simulation.IMailDelivery;
 
 import java.util.LinkedList;
 
+/**
+ * Regular robot, carry one in hand, one in tube
+ */
 public class RegularRobot extends Robot{
 
     private static final int MAX_LOADING_ITEMS = 2;
