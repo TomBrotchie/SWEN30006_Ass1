@@ -5,6 +5,7 @@ import com.unimelb.swen30006.wifimodem.WifiModem;
 import java.util.HashMap;
 
 /**
+ * New Class: Team 03
  * External Building Management System to lookup service fee
  */
 public class BMS extends BMSAdaptor{
@@ -44,7 +45,6 @@ public class BMS extends BMSAdaptor{
      */
     @Override
     public double lookupServiceFee(int nFloor) {
-
         double price = wifiModem.forwardCallToAPI_LookupPrice(nFloor);
 
         if (price < 0) {

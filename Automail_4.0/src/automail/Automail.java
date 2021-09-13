@@ -2,6 +2,9 @@ package automail;
 
 import simulation.IMailDelivery;
 
+/**
+ * Modified Class: Team 03
+ */
 public class Automail {
 
     private Robot[] robots;

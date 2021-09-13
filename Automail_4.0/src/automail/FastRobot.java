@@ -6,6 +6,7 @@ import simulation.IMailDelivery;
 import java.util.LinkedList;
 
 /**
+ * New Class: Team 03
  * Faster speed robot, only carry one item
  */
 public class FastRobot extends Robot{

@@ -12,6 +12,7 @@ import util.ReportDelivery;
 import java.util.HashMap;
 
 /**
+ * Modified Class: Team 03
  * This class simulates the behaviour of AutoMail
  */
 public class Simulation {

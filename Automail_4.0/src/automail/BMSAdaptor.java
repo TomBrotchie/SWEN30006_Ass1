@@ -1,6 +1,7 @@
 package automail;
 
 /**
+ * New Class: Team 03
  * Indirection BMS adaptor class to prevent future variation
  */
 public abstract class BMSAdaptor {

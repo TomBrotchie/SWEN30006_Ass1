@@ -6,6 +6,7 @@ import simulation.IMailDelivery;
 import java.util.LinkedList;
 
 /**
+ * New Class: Team 03
  * Bigger carry capacity robot (5 items in tube)
  */
 public class BulkRobot extends Robot{

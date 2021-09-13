@@ -6,6 +6,7 @@ import simulation.IMailDelivery;
 import java.util.LinkedList;
 
 /**
+ * New Class: Team 03
  * Regular robot, carry one in hand, one in tube
  */
 public class RegularRobot extends Robot{

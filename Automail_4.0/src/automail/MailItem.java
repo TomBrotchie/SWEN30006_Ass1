@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
+ * Modified Class: Team 03
  * Represents a mail item
  */
 public class MailItem {

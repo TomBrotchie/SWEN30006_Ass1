@@ -1,5 +1,9 @@
 package automail;
 
+/**
+ * New Class: Team 03
+ * Record the base charging rate of different types of robot
+ */
 public enum RobotBaseRate {
 
     REGULAR(0.025),
